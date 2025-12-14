@@ -4,21 +4,153 @@
   <meta charset="utf-8">
   <title>Cognitive Utilities</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <meta name="description" content="Practical cognitive tools. No coaching. No advice.">
+
+  <style>
+    :root {
+      --bg: #F8F9F7;
+      --text-main: #1F1F1F;
+      --text-secondary: #5A5A5A;
+      --accent: #3F6C6B;
+      --divider: #D6D9D6;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   Inter, Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 720px;
+      padding: 48px 24px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .logo {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin: 0;
+      letter-spacing: 0.2px;
+    }
+
+    .tagline {
+      color: var(--text-secondary);
+      margin: 12px 0 40px 0;
+      max-width: 520px;
+    }
+
+    /* Sections */
+    h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 0 0 16px 0;
+      padding-top: 24px;
+      border-top: 1px solid var(--divider);
+    }
+
+    .tool {
+      margin-bottom: 28px;
+    }
+
+    .tool-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .tool-desc {
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+
+    .tool-meta {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    footer {
+      margin-top: 56px;
+      padding-top: 16px;
+      border-top: 1px solid var(--divider);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Cognitive Utilities</h1>
-  <p>Practical cognitive tools. No coaching. No advice.</p>
+  <main class="container">
 
-  <h2>Available tools</h2>
-  <ul>
-    <li>
-      <strong>QM1 — Should I Quit This Job or Not?</strong><br>
-      A simple decision tree to stop overthinking.<br>
-      <em>PDF — instant download</em>
-    </li>
-  </ul>
+    <!-- Header -->
+    <header>
+      <!-- Utility Block Icon -->
+      <svg class="logo" viewBox="0 0 24 24" fill="none"
+           xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="4" width="16" height="16"
+              stroke="var(--accent)" stroke-width="2"/>
+      </svg>
 
-  <p><small>These tools don’t make life simpler. They make decisions shorter.</small></p>
+      <h1>Cognitive Utilities</h1>
+    </header>
+
+    <p class="tagline">
+      Practical cognitive tools. No coaching. No advice.
+    </p>
+
+    <!-- Tools -->
+    <section>
+      <h2>Available tools</h2>
+
+      <div class="tool">
+        <div class="tool-title">
+          QM1 — Should I Quit This Job or Not?
+        </div>
+        <div class="tool-desc">
+          A simple decision tree to stop overthinking.
+        </div>
+        <div class="tool-meta">
+          PDF · Instant download
+        </div>
+      </div>
+
+      <!-- Placeholder for future tools -->
+      <!--
+      <div class="tool">
+        <div class="tool-title">QM2 — …</div>
+        <div class="tool-desc">…</div>
+        <div class="tool-meta">PDF · Instant download</div>
+      </div>
+      -->
+
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      These tools don’t make life simpler. They make decisions shorter.
+    </footer>
+
+  </main>
 </body>
 </html>
