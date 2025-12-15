@@ -1,186 +1,578 @@
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>QM Utilities</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cognitive Utilities — QM Utilities</title>
+  <meta name="description" content="Cognitive utilities for clear decisions. No coaching. No motivation. Just usable tools." />
+  <meta name="theme-color" content="#0B1220" />
 
-  <meta name="description" content="Cognitive utilities for clear decisions. No coaching. No explanations. Just tools.">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Cognitive Utilities — QM Utilities" />
+  <meta property="og:description" content="Practical decision tools. No coaching. No fluff. Just clear decisions, faster." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.cognitiveutilities.com/" />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="/favicon.png">
-
-  <!-- Styles -->
   <style>
-    :root {
-      --bg: #F8F9F7;
-      --card-bg: #F1F2F0;
-      --text-main: #1F1F1F;
-      --text-secondary: #5A5A5A;
-      --accent: #3F6C6B;
-      --divider: #D6D9D6;
+    :root{
+      --bg: #0B1220;
+      --panel: rgba(255,255,255,0.06);
+      --panel2: rgba(255,255,255,0.08);
+      --border: rgba(255,255,255,0.12);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.70);
+      --faint: rgba(255,255,255,0.55);
+      --accent: #5B8CFF;
+      --accent2: #8CFFCF;
+      --warn: #FFBE3B;
+      --shadow: 0 20px 60px rgba(0,0,0,0.55);
+      --radius: 18px;
+      --radius2: 26px;
+      --max: 1080px;
     }
 
-    * {
-      box-sizing: border-box;
+    *{ box-sizing: border-box; }
+    html, body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: var(--text);
+      background:
+        radial-gradient(900px 500px at 20% 10%, rgba(91,140,255,0.20), transparent 60%),
+        radial-gradient(700px 450px at 80% 15%, rgba(140,255,207,0.12), transparent 55%),
+        radial-gradient(900px 600px at 50% 90%, rgba(255,190,59,0.08), transparent 60%),
+        var(--bg);
+      line-height: 1.5;
     }
 
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text-main);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-                   Inter, Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.6;
-    }
+    a{ color: inherit; text-decoration: none; }
+    a:focus{ outline: 2px solid rgba(91,140,255,0.8); outline-offset: 3px; border-radius: 10px; }
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 28px 18px 64px; }
 
-    .container {
-      max-width: 720px;
-      padding: 56px 24px;
-      margin: 0 auto;
+    /* Top bar */
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.04));
+      border-radius: var(--radius2);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
-
-    header {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 32px;
+    .brand{
+      display:flex; align-items:center; gap: 12px; min-width: 220px;
     }
-
-    .logo {
-      width: 48px;
-      height: 48px;
-      flex-shrink: 0;
+    .logo{
+      width: 40px; height: 40px; border-radius: 14px;
+      background:
+        radial-gradient(18px 18px at 30% 30%, rgba(255,255,255,0.35), transparent 55%),
+        radial-gradient(16px 16px at 70% 70%, rgba(255,255,255,0.22), transparent 55%),
+        linear-gradient(135deg, rgba(91,140,255,0.9), rgba(140,255,207,0.55));
+      border: 1px solid rgba(255,255,255,0.20);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.45);
+      flex: 0 0 auto;
     }
-
-    h1 {
-      font-size: 1.8rem;
-      font-weight: 600;
-      margin: 0;
+    .brand h1{
+      font-size: 15px; margin:0;
       letter-spacing: 0.2px;
     }
-
-    .tagline {
-      color: var(--text-secondary);
-      margin: 16px 0 48px 0;
-      max-width: 560px;
+    .brand p{
+      margin: 2px 0 0; font-size: 12px; color: var(--muted);
     }
-
-    h2 {
-      font-size: 1.1rem;
+    .nav{
+      display:flex; align-items:center; gap: 10px; flex-wrap: wrap; justify-content: flex-end;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .chip b{ color: var(--text); font-weight: 600; }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding: 11px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
       font-weight: 600;
-      margin: 0 0 16px 0;
-      padding-top: 24px;
-      border-top: 1px solid var(--divider);
+      font-size: 13px;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.20); }
+    .btn.primary{
+      border: 1px solid rgba(91,140,255,0.55);
+      background: linear-gradient(180deg, rgba(91,140,255,0.35), rgba(91,140,255,0.20));
+    }
+    .btn.primary:hover{
+      border-color: rgba(91,140,255,0.75);
+      background: linear-gradient(180deg, rgba(91,140,255,0.45), rgba(91,140,255,0.22));
     }
 
-    .tools-box {
-      background: var(--card-bg);
-      border: 1px solid var(--divider);
-      border-radius: 8px;
-      padding: 24px 24px 8px 24px;
-      margin-top: 24px;
+    /* Hero */
+    .hero{
+      margin-top: 22px;
+      padding: 34px 20px;
+      border-radius: var(--radius2);
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 18px;
+      align-items: start;
+    }
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      font-size: 13px;
+      width: fit-content;
+    }
+    .dot{
+      width: 9px; height: 9px; border-radius: 99px;
+      background: var(--accent2);
+      box-shadow: 0 0 0 4px rgba(140,255,207,0.12);
+    }
+    .hero h2{
+      margin: 14px 0 10px;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+    }
+    .hero p{
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 62ch;
+    }
+    .hero-actions{
+      display:flex; flex-wrap: wrap; gap: 10px; align-items:center;
+      margin-top: 14px;
+    }
+    .micro{
+      color: var(--faint);
+      font-size: 12px;
+      margin-top: 10px;
     }
 
-    .tool {
-      margin-bottom: 28px;
+    .mini-panel{
+      padding: 16px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+    }
+    .mini-panel h3{
+      margin:0 0 8px;
+      font-size: 14px;
+      letter-spacing: 0.2px;
+    }
+    .list{
+      margin:0; padding-left: 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .list li{ margin: 6px 0; }
+    .badge-row{
+      display:flex; flex-wrap: wrap; gap: 8px; margin-top: 12px;
+    }
+    .badge{
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      padding: 7px 10px;
+      border-radius: 999px;
     }
 
-    .tool-title {
+    /* Sections */
+    .section{ margin-top: 22px; }
+    .section-header{
+      display:flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 10px 2px 12px;
+    }
+    .section-header h3{
+      margin:0;
+      font-size: 16px;
+      letter-spacing: 0.2px;
+      color: var(--text);
+    }
+    .section-header p{
+      margin:0;
+      color: var(--faint);
+      font-size: 12px;
+      text-align:right;
+      max-width: 50ch;
+    }
+
+    /* Product cards */
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+    .card{
+      grid-column: span 6;
+      padding: 18px;
+      border-radius: var(--radius2);
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      box-shadow: 0 16px 50px rgba(0,0,0,0.35);
+      position: relative;
+      overflow: hidden;
+    }
+    .card:before{
+      content:"";
+      position:absolute; inset:-1px;
+      background:
+        radial-gradient(500px 220px at 20% 0%, rgba(91,140,255,0.16), transparent 60%),
+        radial-gradient(380px 220px at 90% 10%, rgba(140,255,207,0.10), transparent 55%);
+      pointer-events:none;
+      opacity: 0.9;
+    }
+    .card > *{ position: relative; z-index: 1; }
+    .card .tag{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      padding: 7px 10px;
+      border-radius: 999px;
+    }
+    .card h4{
+      margin: 12px 0 8px;
+      font-size: 20px;
+      letter-spacing: -0.01em;
+    }
+    .card p{
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 70ch;
+    }
+    .bullets{
+      margin: 0 0 14px;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .bullets li{ margin: 6px 0; }
+    .price-line{
+      display:flex; align-items:center; justify-content:space-between; gap: 12px;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+      margin-top: 12px;
+    }
+    .price{
+      color: var(--text);
+      font-weight: 700;
+      font-size: 13px;
+    }
+    .price small{
+      display:block;
+      color: var(--faint);
+      font-weight: 500;
+      margin-top: 2px;
+      font-size: 12px;
+    }
+
+    /* Trust / FAQ */
+    .grid-2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .panel{
+      padding: 18px;
+      border-radius: var(--radius2);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+    }
+    .panel h4{ margin:0 0 8px; font-size: 15px; }
+    .panel p{ margin:0; color: var(--muted); font-size: 13px; }
+    details{
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+      margin-top: 10px;
+    }
+    summary{
+      cursor:pointer;
+      list-style:none;
       font-weight: 600;
-      margin-bottom: 6px;
+      color: var(--text);
+      font-size: 13px;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    details p{ margin: 8px 0 0; color: var(--muted); font-size: 13px; }
+
+    /* Footer */
+    footer{
+      margin-top: 26px;
+      padding: 18px 14px;
+      border-radius: var(--radius2);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      color: var(--faint);
+      font-size: 12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    footer a{
+      color: rgba(255,255,255,0.82);
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
 
-    .tool-desc {
-      color: var(--text-secondary);
-      margin-bottom: 6px;
-    }
-
-    .tool-meta {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-    }
-
-    a {
-      color: var(--text-main);
-      text-decoration: none;
-      border-bottom: 1px solid var(--divider);
-    }
-
-    a:hover {
-      border-bottom-color: var(--accent);
-    }
-
-    footer {
-      margin-top: 64px;
-      padding-top: 16px;
-      border-top: 1px solid var(--divider);
-      font-size: 0.85rem;
-      color: var(--text-secondary);
+    /* Responsive */
+    @media (max-width: 880px){
+      .hero-grid{ grid-template-columns: 1fr; }
+      .card{ grid-column: span 12; }
+      .grid-2{ grid-template-columns: 1fr; }
+      .nav{ justify-content:flex-start; }
+      .brand{ min-width: 0; }
     }
   </style>
 </head>
 
 <body>
-  <main class="container">
+  <div class="wrap">
 
-    <!-- Header -->
-    <header>
-      <!-- Utility Block Icon -->
-      <svg class="logo" viewBox="0 0 24 24" fill="none"
-           xmlns="http://www.w3.org/2000/svg">
-        <rect x="3" y="3" width="18" height="18"
-              stroke="var(--accent)" stroke-width="2"/>
-      </svg>
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Cognitive Utilities home">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1>Cognitive Utilities</h1>
+          <p>QM Utilities · decision tools</p>
+        </div>
+      </a>
 
-      <h1>QM Utilities</h1>
+      <nav class="nav" aria-label="Primary">
+        <span class="chip"><b>PDF tools</b> · instant download</span>
+        <a class="btn" href="#tools">Tools</a>
+        <a class="btn" href="#faq">FAQ</a>
+        <a class="btn primary" href="#tools">Get a tool</a>
+      </nav>
     </header>
 
-    <p class="tagline">
-      Cognitive utilities for clear decisions.<br>
-      No coaching. No explanations. Just tools.
-    </p>
+    <main id="top" class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="kicker"><span class="dot" aria-hidden="true"></span> No coaching. No fluff. Just decisions, faster.</div>
 
-    <!-- Tools -->
-    <section>
-      <h2>Available tools</h2>
+          <h2>Cognitive utilities for clear decisions.</h2>
 
-      <div class="tools-box">
+          <p>
+            These are practical tools you can use in the moment — when you need a clean decision,
+            not another conversation with yourself.
+          </p>
 
-        <div class="tool">
-          <div class="tool-title">
-            <a href="https://qmutilities.gumroad.com/l/sayingno" target="_blank" rel="noopener">
-              QMS1 — Saying No Without Explaining
-            </a>
+          <div class="hero-actions">
+            <a class="btn primary" href="#tools">View tools</a>
+            <a class="btn" href="#how">How it works</a>
           </div>
-          <div class="tool-desc">
-            Short, fixed refusal phrases to set boundaries without discussion.
-          </div>
-          <div class="tool-meta">
-            PDF · Instant download · 19 (currency at checkout)
+
+          <div class="micro">
+            Designed to be used like a checklist: clear, repeatable, and done.
           </div>
         </div>
 
-        <div class="tool">
-          <div class="tool-title">
-            <a href="https://qmutilities.gumroad.com/l/stayorstop" target="_blank" rel="noopener">
-              QM1 — Stay or Stop? A Rational Decision Tree
+        <aside class="mini-panel" id="how">
+          <h3>What you’ll get</h3>
+          <ul class="list">
+            <li>Printable PDFs you can use immediately.</li>
+            <li>Short, structured content (no “journey”, no worksheets).</li>
+            <li>Language: each tool includes <b>EN + NL</b> PDFs.</li>
+          </ul>
+
+          <div class="badge-row" aria-label="Trust badges">
+            <span class="badge">No accounts</span>
+            <span class="badge">No tracking</span>
+            <span class="badge">No upsells</span>
+            <span class="badge">Built for clarity</span>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <section id="tools" class="section">
+      <div class="section-header">
+        <h3>Available tools</h3>
+        <p>Minimal, structured, and designed to close decisions — not extend them.</p>
+      </div>
+
+      <div class="cards">
+
+        <!-- Tool 1 -->
+        <article class="card" aria-label="QMS1 tool">
+          <span class="tag">QMS1 · Boundary scripts</span>
+          <h4>Saying No Without Explaining <span style="color:var(--muted); font-weight:600;">(EN + NL)</span></h4>
+          <p>
+            Short, fixed refusal phrases to set boundaries without discussion. Use it when a request comes in
+            and you don’t want to negotiate your decision.
+          </p>
+
+          <ul class="bullets">
+            <li>Ready-to-use refusal phrases (clean, neutral, repeatable).</li>
+            <li>Quick reference lines + extended formulations when people keep pushing.</li>
+            <li>Designed to end the decision — not justify it.</li>
+          </ul>
+
+          <div class="price-line">
+            <div class="price">
+              PDF · Instant download · 19 <small>(currency at checkout)</small>
+            </div>
+            <a class="btn primary" href="https://qmutilities.gumroad.com/l/sayingno" target="_blank" rel="noopener noreferrer">
+              Get QMS1
             </a>
           </div>
-          <div class="tool-desc">
-            Decide whether to continue or quit — without overthinking.
+        </article>
+
+        <!-- Tool 2 -->
+        <article class="card" aria-label="QM1 tool">
+          <span class="tag">QM1 · Decision tree</span>
+          <h4>Stay or Stop? A Rational Decision Tree <span style="color:var(--muted); font-weight:600;">(EN + NL)</span></h4>
+          <p>
+            Decide whether to continue or quit — without overthinking. A structured decision tree for situations where
+            staying feels wrong, but stopping feels uncertain.
+          </p>
+
+          <ul class="bullets">
+            <li>Clear decision paths: stay & change, stay with exit plan, final attempt, or stop.</li>
+            <li>Includes a visual tree + a mirrored textual path (so it’s usable anywhere).</li>
+            <li>No therapy language. No motivation talk. Just consistency.</li>
+          </ul>
+
+          <div class="price-line">
+            <div class="price">
+              PDF · Instant download · 19 <small>(currency at checkout)</small>
+            </div>
+            <a class="btn primary" href="https://qmutilities.gumroad.com/l/stayorstop" target="_blank" rel="noopener noreferrer">
+              Get QM1
+            </a>
           </div>
-          <div class="tool-meta">
-            PDF · Instant download · 19 (currency at checkout)
-          </div>
-        </div>
+        </article>
 
       </div>
     </section>
 
-    <!-- Footer -->
+    <section class="section">
+      <div class="section-header">
+        <h3>Why this works</h3>
+        <p>Utility tools are boring on purpose. Boring is stable.</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel">
+          <h4>Not self-help. Not coaching.</h4>
+          <p>
+            These are decision utilities: short, structured and repeatable. They don’t tell you what to feel —
+            they help you finish the decision.
+          </p>
+        </div>
+
+        <div class="panel">
+          <h4>Designed for real moments</h4>
+          <p>
+            When you’re tired, overloaded, or pressured, “reflection” becomes delay. These tools are built
+            for the moment you need a clean answer.
+          </p>
+        </div>
+
+        <div class="panel">
+          <h4>Clarity without drama</h4>
+          <p>
+            Clear structure reduces negotiation (with others and with yourself). You don’t need more nuance.
+            You need a finish line.
+          </p>
+        </div>
+
+        <div class="panel">
+          <h4>EN + NL included</h4>
+          <p>
+            Each tool includes both English and Dutch PDFs in one bundle, so you can use the same utility in any context.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="section">
+      <div class="section-header">
+        <h3>FAQ</h3>
+        <p>Quick answers. No mystery. No hidden agenda.</p>
+      </div>
+
+      <div class="panel">
+        <details>
+          <summary>Do I need an account or subscription?</summary>
+          <p>No. You buy once and download instantly via Gumroad. No subscription, no recurring charges.</p>
+        </details>
+
+        <details>
+          <summary>What exactly do I receive?</summary>
+          <p>Printable PDFs. Each product includes <b>EN + NL</b> in one bundle.</p>
+        </details>
+
+        <details>
+          <summary>Is this therapy, coaching, or advice?</summary>
+          <p>No. These are structured decision tools. Use them like checklists: apply → decide → done.</p>
+        </details>
+
+        <details>
+          <summary>Why does it say “19 (currency at checkout)”?</summary>
+          <p>Gumroad shows your local currency at checkout. The price line stays consistent without locking you into €/$/£ on the page.</p>
+        </details>
+      </div>
+    </section>
+
     <footer>
-      These tools don’t make life simpler. They make decisions shorter.
+      <div>
+        © <span id="year"></span> Cognitive Utilities · QM Utilities
+        <span style="color:var(--faint);">— tools for clear decisions.</span>
+      </div>
+      <div>
+        <a href="https://qmutilities.gumroad.com/" target="_blank" rel="noopener noreferrer">Gumroad store</a>
+        &nbsp;·&nbsp;
+        <a href="#tools">Tools</a>
+        &nbsp;·&nbsp;
+        <a href="#top">Back to top</a>
+      </div>
     </footer>
 
-  </main>
+  </div>
+
+  <script>
+    // tiny, harmless enhancement (optional)
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
